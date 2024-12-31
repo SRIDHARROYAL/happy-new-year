@@ -3,77 +3,196 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Celebrate the New Year with a personalized greeting and fireworks display">
     <title>Happy New Year</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            background-color: #f0f8ff;
-            color: #333;
+        /* Global Styles */
+        * {
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            text-align: center;
+            background: linear-gradient(45deg, #4facfe, #00f2fe);
+            color: #ffffff;
+            height: 100vh;
+            overflow: hidden;
             display: flex;
             flex-direction: column;
             justify-content: center;
-            height: 100vh;
+            align-items: center;
+            animation: gradientAnimation 10s infinite alternate;
         }
 
+        @keyframes gradientAnimation {
+            0% { background: linear-gradient(45deg, #4facfe, #00f2fe); }
+            50% { background: linear-gradient(45deg, #ff9a9e, #fad0c4); }
+            100% { background: linear-gradient(45deg, #4facfe, #00f2fe); }
+        }
+
+        /* Header Section */
         h1 {
-            color: #2c3e50;
+            font-size: 3rem;
+            text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.3);
+            margin-bottom: 10px;
         }
 
+        p {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+        }
+
+        /* Input and Button */
         input[type="text"] {
-            padding: 10px;
-            margin: 10px;
-            font-size: 16px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
+            padding: 15px;
+            font-size: 1rem;
+            border: none;
+            border-radius: 25px;
+            outline: none;
             width: 80%;
             max-width: 400px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+            margin-bottom: 15px;
         }
 
         button {
-            padding: 10px 20px;
-            font-size: 16px;
-            background-color: #3498db;
-            color: white;
+            padding: 15px 30px;
+            font-size: 1rem;
+            background: #ff7eb3;
+            color: #ffffff;
             border: none;
-            border-radius: 5px;
+            border-radius: 25px;
             cursor: pointer;
-            transition: background-color 0.3s;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
         }
 
         button:hover {
-            background-color: #2980b9;
+            transform: scale(1.1);
+            box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.5);
         }
 
+        /* Message Display */
         .message {
+            font-size: 1.5rem;
+            color: #f0f8ff;
             margin-top: 20px;
-            font-size: 18px;
-            color: #2ecc71;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Fireworks Animation */
+        .fireworks {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .firework {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            background: radial-gradient(circle, #fff, transparent);
+            border-radius: 50%;
+            animation: explode 1.5s linear infinite;
+        }
+
+        @keyframes explode {
+            0% {
+                transform: scale(0.5);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(3);
+                opacity: 0;
+            }
+        }
+
+        /* Footer */
+        footer {
+            position: absolute;
+            bottom: 20px;
+            text-align: center;
+            font-size: 0.9rem;
+            color: #f0f8ff;
+            width: 100%;
+        }
+
+        footer a {
+            color: #ffd700;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
         }
     </style>
 </head>
 <body>
-    <h1>Happy New Year 2025!</h1>
-    <p>Enter your name to receive a personalized message:</p>
-    <input type="text" id="nameInput" placeholder="Enter your name">
+    <h1>🎉 Welcome 2025! 🎉</h1>
+    <p>Enter your name to receive a personalized New Year message:</p>
+    <input type="text" id="nameInput" placeholder="Your Name">
     <button onclick="displayMessage()">Submit</button>
+
     <div class="message" id="message"></div>
+    <div class="fireworks" id="fireworks"></div>
+
+    <footer>
+        Made with ❤️ for the New Year | <a href="https://example.com" target="_blank">Learn More</a>
+    </footer>
 
     <script>
+        // Handle Message Display
         function displayMessage() {
             const name = document.getElementById('nameInput').value;
             const messageDiv = document.getElementById('message');
+            const fireworksContainer = document.getElementById('fireworks');
 
             if (name.trim() === "") {
-                messageDiv.textContent = "Please enter your name!";
-                messageDiv.style.color = "red";
-            } else {
-                messageDiv.textContent = `Happy New Year, ${name}! Wishing you a year filled with joy, success, and health.`;
-                messageDiv.style.color = "#2ecc71";
+                messageDiv.textContent = "Please enter your name to celebrate!";
+                messageDiv.style.color = "#ff4444";
+                return;
+            }
+
+            messageDiv.textContent = `🎆 Happy New Year, ${name}! 🎆\nMay your year be filled with joy, success, and amazing memories.`;
+            messageDiv.style.color = "#f0f8ff";
+            generateFireworks(fireworksContainer);
+        }
+
+        // Generate Fireworks Effect
+        function generateFireworks(container) {
+            for (let i = 0; i < 20; i++) {
+                const firework = document.createElement('div');
+                firework.classList.add('firework');
+
+                firework.style.left = `${Math.random() * 100}%`;
+                firework.style.top = `${Math.random() * 100}%`;
+                firework.style.animationDelay = `${Math.random()}s`;
+
+                container.appendChild(firework);
+
+                setTimeout(() => {
+                    firework.remove();
+                }, 1500);
             }
         }
+
+        // Auto-trigger Fireworks After Page Load
+        window.onload = () => {
+            const fireworksContainer = document.getElementById('fireworks');
+            generateFireworks(fireworksContainer);
+        };
     </script>
 </body>
 </html>
