@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy New Year</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f0f8ff;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        h1 {
+            color: #2c3e50;
+        }
+
+        input[type="text"] {
+            padding: 10px;
+            margin: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 80%;
+            max-width: 400px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #2980b9;
+        }
+
+        .message {
+            margin-top: 20px;
+            font-size: 18px;
+            color: #2ecc71;
+        }
+    </style>
+</head>
+<body>
+    <h1>Happy New Year 2025!</h1>
+    <p>Enter your name to receive a personalized message:</p>
+    <input type="text" id="nameInput" placeholder="Enter your name">
+    <button onclick="displayMessage()">Submit</button>
+    <div class="message" id="message"></div>
+
+    <script>
+        function displayMessage() {
+            const name = document.getElementById('nameInput').value;
+            const messageDiv = document.getElementById('message');
+
+            if (name.trim() === "") {
+                messageDiv.textContent = "Please enter your name!";
+                messageDiv.style.color = "red";
+            } else {
+                messageDiv.textContent = `Happy New Year, ${name}! Wishing you a year filled with joy, success, and health.`;
+                messageDiv.style.color = "#2ecc71";
+            }
+        }
+    </script>
+</body>
+</html>
